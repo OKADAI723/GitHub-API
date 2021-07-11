@@ -65,12 +65,12 @@ extension SearchRepositoryViewController: UISearchBarDelegate {
             }
             
             guard let _items = items else {
+                print("失敗")
                 return
             }
-            
-            print("aaaaaa",_items)
-            
             self.repositoryArray.append(_items)
+            
+            print("リポジトリ:",self.repositoryArray)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -96,7 +96,8 @@ extension SearchRepositoryViewController: UITableViewDataSource {
         
         let repository = repositoryArray[indexPath.row]
         
-        cell.textLabel?.text = repository.name
+//        cell.textLabel?.text = repository.items[indexPath.row].name
+        cell.textLabel?.text = repository.items[indexPath.row].full_name
         
         return cell
     }
