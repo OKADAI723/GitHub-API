@@ -10,7 +10,7 @@ import UIKit
 final class SearchRepositoryViewController: UIViewController {
     
     //リポジトリ情報を格納する配列
-    private var repositoryArray: [GitHubRepositoryModel] = []
+    private var repositoryArray: [ItemsModel] = []
     //cellIdを定数化
     private let CELL_ID = "CELL_ID"
     
@@ -57,20 +57,20 @@ extension SearchRepositoryViewController: UISearchBarDelegate {
         guard !query.isEmpty else {
             return
         }
-        
+    
         GitHubAPI.shared.searchRepository(query: query) { (items, error) in
             if let _error = error {
                 print("リポジトリの取得に失敗" + _error.localizedDescription)
                 return
             }
-            
+
             guard let _items = items else {
                 print("失敗")
                 return
             }
-            self.repositoryArray.append(_items)
             
-            print("リポジトリ:",self.repositoryArray)
+            self.repositoryArray = _items.items
+            
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -96,8 +96,8 @@ extension SearchRepositoryViewController: UITableViewDataSource {
         
         let repository = repositoryArray[indexPath.row]
         
-//        cell.textLabel?.text = repository.items[indexPath.row].name
-        cell.textLabel?.text = repository.items[indexPath.row].full_name
+        cell.textLabel?.text = repository.name
+//        cell.detailTextLabel?.text = repository.full_name
         
         return cell
     }
