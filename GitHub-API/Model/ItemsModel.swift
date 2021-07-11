@@ -10,10 +10,12 @@ import Foundation
 struct ItemsModel : Codable {
     let name: String
     let full_name: String
+    let id: Int
 
     enum CodingKeys: String, CodingKey {
         case name
         case full_name = "full_name"
+        case id
     }
 }
 
