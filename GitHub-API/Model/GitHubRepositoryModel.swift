@@ -8,5 +8,5 @@
 import Foundation
 
 struct GitHubRepositoryModel: Codable {
-    var name: String?
+    let items: [ItemsModel]
 }
