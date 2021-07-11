@@ -82,6 +82,16 @@ extension SearchRepositoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let idViewController = UIStoryboard.init(name: "Id", bundle: nil).instantiateInitialViewController() as? IdViewController else {
+            fatalError()
+        }
+        
+        idViewController.id = repositoryArray[indexPath.row].id
+        self.present(idViewController, animated: true, completion: nil)
+        
+    }
 }
 
 extension SearchRepositoryViewController: UITableViewDataSource {
